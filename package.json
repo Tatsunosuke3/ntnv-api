@@ -1,0 +1,27 @@
+{
+  "name": "ntnv-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ntnv-models": "github:Tatsunosuke3/ntnv-models",
+    "pg": "^7.17.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/jest": "^24.0.25",
+    "@types/pg": "^7.14.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.4"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node start.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

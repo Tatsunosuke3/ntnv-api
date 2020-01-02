@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  node:
+    build: .
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_READONLY_USER}
+      DB_PASSWORD: ${DB_READONLY_PASSWORD}
+      NTNV_API_PORT: ${NTNV_API_PORT}
+    command: bash -c "npm run build && npm run start"
+    ports:
+      - ${NTNV_API_PORT}:${NTNV_API_PORT}
+    volumes:
+      - .:/srv/ntnv-api
+      - node_modules:/srv/ntnv-api/node_modules
+    # tty: true
+    
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: ${DB_ADMIN_PASSWORD}
+      POSTGRES_USER: ${DB_ADMIN_USER}
+      POSTGRES_DB: ${DB_NAME}
+      DB_READONLY_USER: ${DB_READONLY_USER}
+      DB_READONLY_PASSWORD: ${DB_READONLY_PASSWORD}
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+      - ./db/initdb:/docker-entrypoint-initdb.d
+
+  # adminer:
+  #   image: adminer
+  #   ports:
+  #     - 8080:8080
+
+volumes:
+  node_modules:
+  
+  db_volume:
