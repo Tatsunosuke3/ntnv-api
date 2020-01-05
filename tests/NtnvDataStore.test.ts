@@ -33,5 +33,12 @@ describe('NtnvDataStoreクラス', (): void => {
   test('searchArticleHeadersByTagsメソッド 正常', async () => {
     //const headers = await dataStore.searchArticleHeadersByTags([1, 58], 10, 1, 'updated_at');
     // log(headers);
+    
   });
+
+  test('searchTagsメソッド 正常', async () => {
+    const tags = await dataStore.searchTags(['オリジナル']);
+
+    log(tags);
+  })
 });

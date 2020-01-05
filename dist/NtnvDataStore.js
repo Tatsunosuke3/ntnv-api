@@ -126,13 +126,13 @@ class NtnvDataStore {
           FROM (
             SELECT id, name, tag_category_id, tag_subcategory_id
             FROM tags
-            WHERE name LIKE ANY($1)
+            WHERE name = ANY($1)
           ) AS t
           JOIN tag_categories AS c ON c.id = t.tag_category_id
           JOIN tag_subcategories AS sc ON sc.id = t.tag_subcategory_id
         `,
             values: [
-                keywords.map((value) => `%${value}%`)
+                keywords
             ]
         };
     }
